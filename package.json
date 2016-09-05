@@ -1,0 +1,33 @@
+{
+  "name": "tiled-brunch",
+  "version": "1.0.0",
+  "description": "Tiled integration for brunch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cag/tiled-brunch.git"
+  },
+  "keywords": [
+    "tiled",
+    "brunch",
+    "plugin",
+    "map",
+    "game",
+    "tiles"
+  ],
+  "author": "Alan Lu <gotoalanlu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cag/tiled-brunch/issues"
+  },
+  "homepage": "https://github.com/cag/tiled-brunch#readme",
+  "peerDependencies": {
+    "brunch": "~2.8"
+  },
+  "dependencies": {
+    "tmp": "0.0.28"
+  }
+}
