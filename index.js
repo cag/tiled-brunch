@@ -13,6 +13,7 @@ class TiledPlugin {
         this.config = config && config.plugins && config.plugins.tiled || {};
         this.tiledBin = this.config.tiledBin || 'tiled';
         this.staticTargetExtension = this.config.targetFormat || 'json';
+        this.tempFilePrefix = this.config.tempFilePrefix || '_';
         this.extension = 'tmx';
 
         // Get our tiled version
@@ -52,6 +53,7 @@ class TiledPlugin {
     compileStatic(file) {
         return new Promise((resolve, reject) => {
             tmp.file({
+                prefix: this.tempFilePrefix,
                 postfix: `.${this.staticTargetExtension}`,
                 dir: dirname(file.path)
             }, (err, path, fd, cleanupCallback) => {
