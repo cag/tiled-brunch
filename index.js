@@ -10,8 +10,13 @@ tmp.setGracefulCleanup();
 
 class TiledPlugin {
     constructor(config) {
+        this.config = config && config.plugins && config.plugins.tiled || {};
+        this.tiledBin = this.config.tiledBin || 'tiled';
+        this.staticTargetExtension = this.config.targetFormat || 'json';
+        this.extension = 'tmx';
+
         // Get our tiled version
-        let tiledProc = spawnSync('tiled', ['-v'], {
+        let tiledProc = spawnSync(this.tiledBin, ['-v'], {
             timeout: 10000,
             encoding: 'utf8'
         });
@@ -26,7 +31,7 @@ class TiledPlugin {
         }
 
         // Find out what formats we can export to
-        tiledProc = spawnSync('tiled', ['--export-formats'], {
+        tiledProc = spawnSync(this.tiledBin, ['--export-formats'], {
             timeout: 10000,
             encoding: 'utf8'
         });
@@ -42,11 +47,6 @@ class TiledPlugin {
             formatMap[match[2]] = match[1];
         }
         this.formatMap = formatMap;
-
-        // Tell brunch what we can do
-        this.config = config && config.plugins && config.plugins.tiled;
-        this.extension = 'tmx';
-        this.staticTargetExtension = 'json';
     }
 
     compileStatic(file) {
@@ -60,7 +60,7 @@ class TiledPlugin {
                     return reject(err);
                 }
 
-                let tiledProc = spawn('tiled', [
+                let tiledProc = spawn(this.tiledBin, [
                     '--export-map',
                     this.formatMap[this.staticTargetExtension],
                     file.path,
@@ -81,7 +81,7 @@ class TiledPlugin {
                         });
                     } else {
                         cleanupCallback();
-                        return reject(Error(`[${tiledProc.args}] exited with error code ${code}`));
+                        return reject(Error(`[${tiledProc.spawnargs}] exited with error code ${code}`));
                     }
                 });
             });
