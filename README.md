@@ -1,4 +1,4 @@
-# Tiled for Brunch
+# [Tiled](http://www.mapeditor.org/) for [Brunch](http://brunch.io/)
 
 Tiled integration for Brunch.
 
@@ -6,12 +6,16 @@ Tiled integration for Brunch.
 
     npm install --save-dev tiled-brunch
 
+## Usage
+
+Any TMX files found in your assets folder will be converted into JSON files.
+
 ## Configuration
 
 `config.plugins.tiled.tiledBin` (default: `'tiled'`): This is your Tiled executable. By default, assumes that you can invoke Tiled in your shell with `tiled`.
 
-`config.plugins.tiled.targetFormat` (default: `'json'`): This is the target format that will be created by Tiled. Most of the export formats for Tiled don't work. JSON is pretty much it, so I would leave this alone.
+`config.plugins.tiled.targetFormat` (default: `'json'`): This is the target format that will be created by Tiled. Most of the export formats for Tiled don't work. JSON is pretty much it, so I would leave this alone unless you just wrote a Tiled plugin for your own game engine and you are prepared to deal with it or something.
 
-## Warning
+## Note
 
-This is really early software. Brunch makes lots of tempfile copies while this is operating because Tiled can't export to stdout as of the time of this writing, and the files that are created use paths that are relative to the assets referred to by the original tmx files.
+This will make temporary export files next to your map, as Tiled can't export maps to stdout.
